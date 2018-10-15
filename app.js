@@ -14,6 +14,7 @@ mongoose.connect('mongodb://bichar4:'
     useNewUrlParser: true
 }
 );
+mongoose.Promise = global.Promise;
 
  app.use(morgan('dev'));
  app.use(bodyParser.urlencoded({extended:false}));
