@@ -15,6 +15,7 @@
   "author": "Bichar Dip Shrestha Gurung",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongoose": "^5.3.2",
