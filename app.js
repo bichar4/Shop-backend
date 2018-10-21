@@ -16,7 +16,8 @@ mongoose.connect('mongodb://bichar4:'
 );
 mongoose.Promise = global.Promise;
 
- app.use(morgan('dev'));
+ app.use(morgan('dev')); //use for data logging 
+ app.use('/uploads',express.static('uploads'));
  app.use(bodyParser.urlencoded({extended:false}));
  app.use(bodyParser.json());
 
