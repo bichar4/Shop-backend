@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const checkAuth = require('../middleware/check-auth');
+
 
 const Order = require('../models/order');
 const Product = require('../models/product');
 
-router.get('/',(req,res,next)=>{
+router.get('/',checkAuth,(req,res,next)=>{
    Order.find()
    .select('product quantity _id')
    .populate('product','name')
@@ -34,7 +36,7 @@ router.get('/',(req,res,next)=>{
 });
 
 
-router.post('/',(req,res,next)=>{
+router.post('/',checkAuth,(req,res,next)=>{
     Product.findById(req.body.productId) //this is done to check if there exists a product while we order
     .then(product =>{
         if(!product){
@@ -78,7 +80,7 @@ router.post('/',(req,res,next)=>{
 //  Order.findById(req.params.orderId)
 //  .populate('product')
 //  .exec()
-router.get('/:orderId',(req,res,next)=>{
+router.get('/:orderId',checkAuth,(req,res,next)=>{
     Order.findById(req.params.orderId)
     .populate('product') //<= at this point, got Error: "listen EADDRINUSE :::3000 when i copied .populate from above
                          // however , when hand typed, the error was gone   
@@ -105,7 +107,7 @@ router.get('/:orderId',(req,res,next)=>{
 
 });
 
-router.delete('/:orderId',(req,res,next)=>{
+router.delete('/:orderId',checkAuth,(req,res,next)=>{
     // res.status(200).json({
     //     message:'Order deleted',
     //     orderId:req.params.orderId
